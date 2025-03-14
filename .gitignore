@@ -1,0 +1,11 @@
+DerivedData/
+.DS_Store
+*.xcuserstate
+*.xcworkspace
+Pods/
+*.xcworkspace
+*.xcodeproj/project.xcworkspace
+NeckSusData.xcdatamodeld/
+NeckSus13.entitlements
+Preview Content/
+*.py
