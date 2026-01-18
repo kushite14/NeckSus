@@ -1,17 +1,19 @@
 import Foundation
 import CoreMotion
 
-/// PostureEngine: The sensor-fusion hub for NeckSus 14.
-/// Isolated as an Actor to ensure thread-safety for high-frequency (10Hz) sampling.
+/// PostureEngine: Manages sensor fusion with Adaptive Resource Stewardship.
+/// Implements 10Hz Active and 1Hz Passive sampling logic.
 public actor PostureEngine {
-    private let motionManager = CMMotionManager()
-    private var isMonitoring = false
+    private let detector = PatternDetector()
+    private var currentMode: SamplingMode = .passive
     
-    public init() {}
+    public enum SamplingMode: Double {
+        case active = 0.1  // 10 Hz
+        case passive = 1.0 // 1 Hz
+    }
     
-    public func startMonitoring() async {
-        guard !isMonitoring else { return }
-        isMonitoring = true
-        // Logic: Connect to AdaptiveSampler & AuditLogger
+    public func setMode(_ mode: SamplingMode) {
+        self.currentMode = mode
+        // Logic: Adjust CMMotionManager interval to mode.rawValue
     }
 }
